@@ -1,0 +1,42 @@
+title Batter
+
+participant Main
+participant Director
+actor Actor
+participant Point
+materialdesignicons f14d Constants
+control Action
+control ControlActorsAction
+control MoveActorsAction
+control HandleCollisionsAction
+control DrawActorsAction
+fontawesome f108 OutputService
+fontawesome f11c InputService
+
+note over ControlActorsAction, DrawActorsAction:Children of Action Class
+
+Main<-Actor:Passing Actor Class
+Main<-Point:Passing Point Class
+
+note over Main: Create Actors
+
+ControlActorsAction->Main:Child of input, script["input"]
+MoveActorsAction->Main:script["update"]
+HandleCollisionsAction->Main:script["update"]
+DrawActorsAction->Main:Child of ouptu, script["output"]
+
+Main->Director: Create Script
+activate Director
+Director->ControlActorsAction:Get Direction
+ControlActorsAction->InputService:Get Input
+ControlActorsAction<-InputService:Key Codes
+
+Director<-ControlActorsAction:Directional Coordinates
+Director->MoveActorsAction:Move according to coordinates
+Director->HandleCollisionsAction:Check for Collisions
+note over HandleCollisionsAction:Behaviors::\nDelete\nBounce\nEnd
+Director->DrawActorsAction:Draw Actors
+DrawActorsAction->OutputService:Output Actors
+
+note over Director:Break loop when\n    Game Over
+deactivate Director
