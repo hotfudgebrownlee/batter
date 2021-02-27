@@ -26,7 +26,7 @@ class ControlActorsAction(Action):
         paddle = cast["paddle"][0] # there's only one in the cast
         if paddle.get_position().get_x() <= 0 and direction.get_x() < 0:
             pass
-        elif paddle.get_position().get_x() >= constants.MAX_X - 12 and direction.get_x() > 0:
+        elif paddle.get_position().get_x() >= constants.MAX_X - 11 and direction.get_x() > 0:
             pass
         else:
             paddle.set_velocity(direction)
