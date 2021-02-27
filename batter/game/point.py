@@ -59,6 +59,22 @@ class Point:
         """
         return self._y
 
+    def set_x(self,x):
+        """Gets the horizontal distance.
+        
+        Returns:
+            integer: The horizontal distance.
+        """
+        self._x = x
+
+    def set_y(self,y):
+        """Gets the vertical distance.
+        
+        Returns:
+            integer: The vertical distance.
+        """
+        self._y = y
+
     def is_zero(self):
         """Whether or not the point is zero or x = 0 and y = 0.
         

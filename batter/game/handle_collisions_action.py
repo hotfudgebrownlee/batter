@@ -31,11 +31,15 @@ class HandleCollisionsAction(Action):
                 if ball.get_position().equals(brick.get_position()):
                     brick.set_text(" ")
                     ball.set_velocity(Point((bvx),(bvy * -1)))
-        if bpx in range(ppx,ppx + 10) and bpy == ppy:
+        if bpx in range(ppx,ppx + 11) and bpy == ppy:
             ball.set_velocity(Point(bvx,(bvy * -1)))
-        elif bpx == 0 or bpx == constants.MAX_X:
+        elif bpx == 1 or bpx == int(constants.MAX_X-1):
             ball.set_velocity(Point((bvx * -1),bvy))
         elif bpy == 0:
             ball.set_velocity(Point(bvx,(bvy * -1)))
-        elif bpy == constants.MAX_Y:
-            del ball
+        elif bpy == int(constants.MAX_Y):
+            ball.set_velocity(Point(0,0))
+            x = int(constants.MAX_X / 2)-5
+            y = int(constants.MAX_Y / 2)
+            ball.set_position(Point(x,y))
+            ball.set_text("Game Over")
