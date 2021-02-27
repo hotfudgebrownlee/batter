@@ -1,3 +1,3 @@
-MAX_X = 81
-MAX_Y = 20
+MAX_X = 80
+MAX_Y = 21
 FRAME_LENGTH = 0.08

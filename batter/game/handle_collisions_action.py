@@ -35,8 +35,10 @@ class HandleCollisionsAction(Action):
             ball.set_velocity(Point(bvx,(bvy * -1)))
         elif bpx == 1 or bpx == int(constants.MAX_X-1):
             ball.set_velocity(Point((bvx * -1),bvy))
+            ball.get_position().set_y(bpy + 1)
         elif bpy == 0:
             ball.set_velocity(Point(bvx,(bvy * -1)))
+            ball.get_position().set_y(bpy + 1)
         elif bpy == int(constants.MAX_Y):
             ball.set_velocity(Point(0,0))
             x = int(constants.MAX_X / 2)-5
