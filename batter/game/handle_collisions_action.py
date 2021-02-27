@@ -1,6 +1,7 @@
 import random
 from game import constants
 from game.action import Action
+from game.point import Point
 
 class HandleCollisionsAction(Action):
     """A code template for handling collisions. The responsibility of this
@@ -19,17 +20,22 @@ class HandleCollisionsAction(Action):
         paddle = cast["paddle"][0] # there's only one
         ball = cast["ball"][0] # there's only one
         bricks = cast["brick"]
-        x = ball.get_velocity().get_x()
-        y = ball.get_velocity().get_y()
+        bvx = ball.get_velocity().get_x()
+        bvy = ball.get_velocity().get_y()
+        bpx = ball.get_position().get_x()
+        bpy = ball.get_position().get_y()
+        ppx = paddle.get_position().get_x()
+        ppy = paddle.get_position().get_y()
         for brick in bricks:
-            if ball.get_position().equals(brick.get_position()):
-                del brick
-                ball.set_velocity((x * -1),(y * -1))
-        if ball.get_position().equals(paddle.get_position()):
-            ball.set_velocity(x,(y * -1))
-        elif ball.get_position().get_x() == (0 or constants.MAX_X):
-            ball.set_velocity((x * -1),y)
-        elif ball.get_position().get_y() == 0:
-            ball.set_velocity(x,(y * -1))
-        elif ball.get_position().get_y() == constants.MAX_Y:
+            if brick.get_text() == "*":
+                if ball.get_position().equals(brick.get_position()):
+                    brick.set_text(" ")
+                    ball.set_velocity(Point((bvx),(bvy * -1)))
+        if bpx in range(ppx,ppx + 10) and bpy == ppy:
+            ball.set_velocity(Point(bvx,(bvy * -1)))
+        elif bpx == 0 or bpx == constants.MAX_X:
+            ball.set_velocity(Point((bvx * -1),bvy))
+        elif bpy == 0:
+            ball.set_velocity(Point(bvx,(bvy * -1)))
+        elif bpy == constants.MAX_Y:
             del ball
